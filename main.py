@@ -249,7 +249,10 @@ def run_pipeline(markets: str = "all", allow_download: bool = True, mode: str = 
                 all_trades.extend(trades)
                 current_signal_lines.append(describe_current_signal(df, symbol, india_cfg["timeframe"]))
 
-    metrics = calculate_metrics(all_trades, starting_balance=CONFIG["risk"]["account_balance"])
+    # Calculate metrics from ALL trades in DB for this run's symbols
+    # (not just new ones -- deduplication means all_trades may be empty on repeat runs)
+    all_db_trades = db.fetch_all_trades()
+    metrics = calculate_metrics(all_db_trades, starting_balance=CONFIG["risk"]["account_balance"])
     all_time_total = db.count_trades()
     report_text = build_daily_report(run_tag, markets_tested, all_trades, metrics, current_signal_lines, all_time_total)
 
@@ -268,8 +271,8 @@ def run_pipeline(markets: str = "all", allow_download: bool = True, mode: str = 
             "markets_tested": ", ".join(markets_tested) if markets_tested else "none",
             **metrics.to_dict(),
         }
-        print("DEBUG report_dict:", report_dict)
         sheets_send_report(report_dict, sheets_cfg)
+
     if not skip_telegram:
         send_report(report_text, CONFIG["telegram"])
 
