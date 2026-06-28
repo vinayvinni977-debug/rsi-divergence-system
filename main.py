@@ -268,8 +268,8 @@ def run_pipeline(markets: str = "all", allow_download: bool = True, mode: str = 
             "markets_tested": ", ".join(markets_tested) if markets_tested else "none",
             **metrics.to_dict(),
         }
+        print("DEBUG report_dict:", report_dict)
         sheets_send_report(report_dict, sheets_cfg)
-
     if not skip_telegram:
         send_report(report_text, CONFIG["telegram"])
 
