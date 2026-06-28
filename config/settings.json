@@ -1,0 +1,57 @@
+{
+  "crypto": {
+    "exchange": "binance",
+    "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+    "timeframe": "1h",
+    "lookback_days": 365
+  },
+  "india": {
+    "symbols": {
+      "NIFTY": "^NSEI",
+      "BANKNIFTY": "^NSEBANK"
+    },
+    "timeframe": "15m",
+    "lookback_days": 59
+  },
+  "strategy": {
+    "rsi_period": 14,
+    "swing_order": 5,
+    "sr_zone_lookback": 100,
+    "sr_zone_tolerance_pct": 0.3,
+    "sr_min_touches": 2,
+    "risk_reward_ratio": 4.0,
+    "min_divergence_bars": 5,
+    "max_divergence_bars": 60,
+    "confirmation_max_wait_bars": 10
+  },
+  "risk": {
+    "account_balance": 100000,
+    "risk_percent": 1.0,
+    "currency": "USD"
+  },
+  "telegram": {
+    "enabled": true,
+    "bot_token": "8976562485:AAFolQnEXVqVcT_zuOFKIKETevMK3rtPZRs",
+    "chat_id": "909820955"
+  },
+"google_sheets": {
+     "enabled": true,
+     "webapp_url": "https://script.google.com/macros/s/AKfycbw_JhFpmYGrnfIrWhCMG28vUVetc7wBklcu7d76gD-2xrQRvUfj17PpTs5KdUZBO3Sz/exec",
+     "shared_secret": "viny_rsi_8821_secret"
+   },
+  "database": {
+    "path": "database/trades.db"
+  },
+  "paths": {
+    "data_dir": "data",
+    "logs_dir": "logs",
+    "reports_dir": "reports",
+    "exports_dir": "exports"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/system.log",
+    "max_bytes": 5242880,
+    "backup_count": 5
+  }
+}

@@ -1,0 +1,265 @@
+2026-06-21 21:06:40 | INFO     | rsi_divergence | Database ready at /home/claude/RSI_Divergence_System/database/trades.db
+2026-06-21 21:06:40 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-21 21:06:40 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-21 21:06:40 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-21 21:06:40 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-21 21:06:40 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-21 21:06:40 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-21 21:06:40 | INFO     | rsi_divergence | Report written to /home/claude/RSI_Divergence_System/reports/daily_report_20260621_210640.txt
+2026-06-21 21:06:40 | INFO     | rsi_divergence | Exported 3 trade(s) to /home/claude/RSI_Divergence_System/exports/trades_20260621_210640.csv
+2026-06-21 21:06:55 | INFO     | rsi_divergence | Database ready at /home/claude/RSI_Divergence_System/database/trades.db
+2026-06-21 21:06:55 | WARNING  | rsi_divergence | No data available for BTCUSDT (1h) -- skipping.
+2026-06-21 21:06:55 | WARNING  | rsi_divergence | No data available for ETHUSDT (1h) -- skipping.
+2026-06-21 21:06:55 | WARNING  | rsi_divergence | No data available for SOLUSDT (1h) -- skipping.
+2026-06-21 21:06:55 | WARNING  | rsi_divergence | No data available for NIFTY (15m) -- skipping.
+2026-06-21 21:06:55 | WARNING  | rsi_divergence | No data available for BANKNIFTY (15m) -- skipping.
+2026-06-21 21:06:55 | INFO     | rsi_divergence | Report written to /home/claude/RSI_Divergence_System/reports/daily_report_20260621_210655.txt
+2026-06-21 21:07:01 | INFO     | rsi_divergence | === Daily automated run starting ===
+2026-06-21 21:07:01 | INFO     | rsi_divergence | Database ready at /home/claude/RSI_Divergence_System/database/trades.db
+2026-06-21 21:07:01 | ERROR    | rsi_divergence | Binance fetch failed for BTC/USDT: binance GET https://api.binance.com/api/v3/exchangeInfo
+2026-06-21 21:07:01 | WARNING  | rsi_divergence | No candles retrieved for BTC/USDT 1h.
+2026-06-21 21:07:01 | WARNING  | rsi_divergence | No data available for BTCUSDT (1h) -- skipping.
+2026-06-21 21:07:01 | ERROR    | rsi_divergence | Binance fetch failed for ETH/USDT: binance GET https://api.binance.com/api/v3/exchangeInfo
+2026-06-21 21:07:01 | WARNING  | rsi_divergence | No candles retrieved for ETH/USDT 1h.
+2026-06-21 21:07:01 | WARNING  | rsi_divergence | No data available for ETHUSDT (1h) -- skipping.
+2026-06-21 21:07:01 | ERROR    | rsi_divergence | Binance fetch failed for SOL/USDT: binance GET https://api.binance.com/api/v3/exchangeInfo
+2026-06-21 21:07:01 | WARNING  | rsi_divergence | No candles retrieved for SOL/USDT 1h.
+2026-06-21 21:07:01 | WARNING  | rsi_divergence | No data available for SOLUSDT (1h) -- skipping.
+2026-06-21 21:07:02 | WARNING  | rsi_divergence | No data retrieved for ^NSEI 15m.
+2026-06-21 21:07:02 | WARNING  | rsi_divergence | No data available for NIFTY (15m) -- skipping.
+2026-06-21 21:07:02 | WARNING  | rsi_divergence | No data retrieved for ^NSEBANK 15m.
+2026-06-21 21:07:02 | WARNING  | rsi_divergence | No data available for BANKNIFTY (15m) -- skipping.
+2026-06-21 21:07:02 | INFO     | rsi_divergence | Report written to /home/claude/RSI_Divergence_System/reports/daily_report_20260621_210701.txt
+2026-06-21 21:07:02 | INFO     | rsi_divergence | Telegram notifications disabled in settings.json -- skipping send.
+2026-06-21 21:07:02 | ERROR    | rsi_divergence | Daily automated run failed.
+Traceback (most recent call last):
+  File "/home/claude/RSI_Divergence_System/scheduler/daily_runner.py", line 36, in main
+    run_tag = run_pipeline(markets="all", allow_download=True, mode="backtest", skip_telegram=False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/RSI_Divergence_System/main.py", line 253, in run_pipeline
+    print(report_text)
+BrokenPipeError: [Errno 32] Broken pipe
+2026-06-21 21:07:02 | INFO     | rsi_divergence | Telegram notifications disabled in settings.json -- skipping send.
+2026-06-22 03:04:37 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:04:46 | INFO     | rsi_divergence | Saved 1402 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-22 03:04:46 | INFO     | rsi_divergence | [NIFTY] 15 raw divergence event(s) detected.
+2026-06-22 03:04:46 | INFO     | rsi_divergence | [NIFTY] 15 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 113400.02 (started 100000.00).
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [NIFTY] 13 trade(s) journaled (1 still open at data end).
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [NIFTY] 15 raw divergence event(s) detected.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [NIFTY] 15 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | Saved 1402 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [BANKNIFTY] 16 raw divergence event(s) detected.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 110139.86 (started 100000.00).
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [BANKNIFTY] 12 trade(s) journaled (2 still open at data end).
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [BANKNIFTY] 16 raw divergence event(s) detected.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:04:47 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_213437.txt
+2026-06-22 03:04:47 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_213437.csv
+2026-06-22 03:04:47 | INFO     | rsi_divergence | Telegram notifications disabled in settings.json -- skipping send.
+2026-06-22 03:21:42 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:21:43 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:21:43 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:21:43 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-22 03:21:43 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-22 03:21:43 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:21:43 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:21:43 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_215142.txt
+2026-06-22 03:21:43 | INFO     | rsi_divergence | Exported 3 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_215142.csv
+2026-06-22 03:21:43 | INFO     | rsi_divergence | Telegram notifications disabled in settings.json -- skipping send.
+2026-06-22 03:25:33 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:25:33 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:25:33 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:25:33 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-22 03:25:33 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-22 03:25:33 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:25:33 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:25:33 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_215533.txt
+2026-06-22 03:25:33 | INFO     | rsi_divergence | Exported 3 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_215533.csv
+2026-06-22 03:25:48 | ERROR    | rsi_divergence | Telegram send failed: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8976562485:AAFolQnEXVqVcT_zuOFKIKETevMK3rtPZRs/sendMessage (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x22368ec9a90>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2026-06-22 03:26:55 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:26:56 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:26:56 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:26:56 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-22 03:26:56 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-22 03:26:56 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:26:56 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:26:56 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_215655.txt
+2026-06-22 03:26:56 | INFO     | rsi_divergence | Exported 3 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_215655.csv
+2026-06-22 03:27:11 | ERROR    | rsi_divergence | Telegram send failed: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8976562485:AAFolQnEXVqVcT_zuOFKIKETevMK3rtPZRs/sendMessage (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x21a431f9a90>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2026-06-22 03:29:20 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:29:20 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:29:20 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:29:20 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-22 03:29:20 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-22 03:29:20 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:29:20 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:29:20 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_215920.txt
+2026-06-22 03:29:20 | INFO     | rsi_divergence | Exported 3 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_215920.csv
+2026-06-22 03:29:35 | ERROR    | rsi_divergence | Telegram send failed: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8976562485:AAFolQnEXVqVcT_zuOFKIKETevMK3rtPZRs/sendMessage (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x1c5ecaa1a90>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2026-06-22 03:41:34 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:41:34 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:41:34 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:41:34 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-22 03:41:34 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-22 03:41:35 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:41:35 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:41:35 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_221134.txt
+2026-06-22 03:41:35 | INFO     | rsi_divergence | Exported 3 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_221134.csv
+2026-06-22 03:41:36 | ERROR    | rsi_divergence | Google Sheets webapp returned HTTP 403: <!DOCTYPE html><html lang="en"><head><meta name="description" content="Web word processing, spreadsheets and presentations"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"><link rel="shortcut icon" href="//docs.google.com/f
+2026-06-22 03:41:37 | ERROR    | rsi_divergence | Google Sheets webapp returned HTTP 403: <!DOCTYPE html><html lang="en"><head><meta name="description" content="Web word processing, spreadsheets and presentations"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"><link rel="shortcut icon" href="//docs.google.com/f
+2026-06-22 03:45:01 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:45:01 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:45:01 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:45:01 | INFO     | rsi_divergence | Backtest complete: 3 trade(s) simulated, final balance 107078.40 (started 100000.00).
+2026-06-22 03:45:01 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 trade(s) journaled (0 still open at data end).
+2026-06-22 03:45:01 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 raw divergence event(s) detected.
+2026-06-22 03:45:01 | INFO     | rsi_divergence | [SAMPLE_BTCUSDT] 3 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:45:01 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_221501.txt
+2026-06-22 03:45:01 | INFO     | rsi_divergence | Exported 3 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_221501.csv
+2026-06-22 03:45:05 | INFO     | rsi_divergence | Pushed 3 trade(s) to Google Sheets.
+2026-06-22 03:45:09 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-22 03:47:00 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:47:06 | INFO     | rsi_divergence | Saved 8760 candles for BTCUSDT 1h -> C:\RSI_Divergence_System\data\crypto\BTCUSDT_1h.csv
+2026-06-22 03:47:06 | INFO     | rsi_divergence | [BTCUSDT] 80 raw divergence event(s) detected.
+2026-06-22 03:47:06 | INFO     | rsi_divergence | [BTCUSDT] 76 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:47:06 | INFO     | rsi_divergence | Backtest complete: 72 trade(s) simulated, final balance 96673.62 (started 100000.00).
+2026-06-22 03:47:06 | INFO     | rsi_divergence | [BTCUSDT] 72 trade(s) journaled (0 still open at data end).
+2026-06-22 03:47:06 | INFO     | rsi_divergence | [BTCUSDT] 80 raw divergence event(s) detected.
+2026-06-22 03:47:06 | INFO     | rsi_divergence | [BTCUSDT] 76 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:47:11 | INFO     | rsi_divergence | Saved 8760 candles for ETHUSDT 1h -> C:\RSI_Divergence_System\data\crypto\ETHUSDT_1h.csv
+2026-06-22 03:47:12 | INFO     | rsi_divergence | [ETHUSDT] 43 raw divergence event(s) detected.
+2026-06-22 03:47:12 | INFO     | rsi_divergence | [ETHUSDT] 39 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:47:12 | INFO     | rsi_divergence | Backtest complete: 35 trade(s) simulated, final balance 105385.71 (started 100000.00).
+2026-06-22 03:47:12 | INFO     | rsi_divergence | [ETHUSDT] 35 trade(s) journaled (1 still open at data end).
+2026-06-22 03:47:12 | INFO     | rsi_divergence | [ETHUSDT] 43 raw divergence event(s) detected.
+2026-06-22 03:47:12 | INFO     | rsi_divergence | [ETHUSDT] 39 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:47:17 | INFO     | rsi_divergence | Saved 8760 candles for SOLUSDT 1h -> C:\RSI_Divergence_System\data\crypto\SOLUSDT_1h.csv
+2026-06-22 03:47:17 | INFO     | rsi_divergence | [SOLUSDT] 43 raw divergence event(s) detected.
+2026-06-22 03:47:17 | INFO     | rsi_divergence | [SOLUSDT] 40 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:47:17 | INFO     | rsi_divergence | Backtest complete: 37 trade(s) simulated, final balance 93595.73 (started 100000.00).
+2026-06-22 03:47:17 | INFO     | rsi_divergence | [SOLUSDT] 37 trade(s) journaled (1 still open at data end).
+2026-06-22 03:47:18 | INFO     | rsi_divergence | [SOLUSDT] 43 raw divergence event(s) detected.
+2026-06-22 03:47:18 | INFO     | rsi_divergence | [SOLUSDT] 40 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:47:18 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_221700.txt
+2026-06-22 03:47:18 | INFO     | rsi_divergence | Exported 144 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_221700.csv
+2026-06-22 03:47:38 | ERROR    | rsi_divergence | Google Sheets send failed: HTTPSConnectionPool(host='script.google.com', port=443): Read timed out. (read timeout=20)
+2026-06-22 03:47:41 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-22 03:47:56 | ERROR    | rsi_divergence | Telegram send failed: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8976562485:AAFolQnEXVqVcT_zuOFKIKETevMK3rtPZRs/sendMessage (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x1ed25379d10>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2026-06-22 03:50:07 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-22 03:50:09 | INFO     | rsi_divergence | Saved 1402 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [NIFTY] 15 raw divergence event(s) detected.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [NIFTY] 15 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 113400.02 (started 100000.00).
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [NIFTY] 13 trade(s) journaled (1 still open at data end).
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [NIFTY] 15 raw divergence event(s) detected.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [NIFTY] 15 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | Saved 1402 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [BANKNIFTY] 16 raw divergence event(s) detected.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 110139.86 (started 100000.00).
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [BANKNIFTY] 12 trade(s) journaled (2 still open at data end).
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [BANKNIFTY] 16 raw divergence event(s) detected.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-22 03:50:09 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260621_222007.txt
+2026-06-22 03:50:09 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260621_222007.csv
+2026-06-22 03:50:22 | INFO     | rsi_divergence | Pushed 25 trade(s) to Google Sheets.
+2026-06-22 03:50:25 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-22 03:50:40 | ERROR    | rsi_divergence | Telegram send failed: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8976562485:AAFolQnEXVqVcT_zuOFKIKETevMK3rtPZRs/sendMessage (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x26d2ad1ad50>, 'Connection to api.telegram.org timed out. (connect timeout=15)'))
+2026-06-29 04:10:37 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-29 04:10:44 | INFO     | rsi_divergence | Saved 1377 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-29 04:10:44 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:10:44 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:10:44 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 112266.02 (started 100000.00).
+2026-06-29 04:10:44 | INFO     | rsi_divergence | [NIFTY] 13 trade(s) journaled (0 still open at data end).
+2026-06-29 04:10:44 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:10:44 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:10:45 | INFO     | rsi_divergence | Saved 1377 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-29 04:10:45 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:10:45 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:10:45 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 113400.01 (started 100000.00).
+2026-06-29 04:10:45 | INFO     | rsi_divergence | [BANKNIFTY] 12 trade(s) journaled (0 still open at data end).
+2026-06-29 04:10:45 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:10:45 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:10:45 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260628_224037.txt
+2026-06-29 04:10:45 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260628_224037.csv
+2026-06-29 04:10:55 | INFO     | rsi_divergence | Pushed 25 trade(s) to Google Sheets.
+2026-06-29 04:11:01 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-29 04:11:03 | INFO     | rsi_divergence | Telegram report sent successfully.
+2026-06-29 04:20:26 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-29 04:20:27 | INFO     | rsi_divergence | Saved 1377 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-29 04:20:27 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:20:27 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:20:27 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 112266.02 (started 100000.00).
+2026-06-29 04:20:27 | INFO     | rsi_divergence | [NIFTY] 13 trade(s) journaled (0 still open at data end).
+2026-06-29 04:20:27 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:20:27 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:20:28 | INFO     | rsi_divergence | Saved 1377 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-29 04:20:28 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:20:28 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:20:28 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 113400.01 (started 100000.00).
+2026-06-29 04:20:28 | INFO     | rsi_divergence | [BANKNIFTY] 12 trade(s) journaled (0 still open at data end).
+2026-06-29 04:20:28 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:20:28 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:20:28 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260628_225026.txt
+2026-06-29 04:20:28 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260628_225026.csv
+2026-06-29 04:20:43 | INFO     | rsi_divergence | Pushed 25 trade(s) to Google Sheets.
+2026-06-29 04:20:46 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-29 04:24:25 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-29 04:24:26 | INFO     | rsi_divergence | Saved 1377 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-29 04:24:26 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:24:26 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:24:26 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 112266.02 (started 100000.00).
+2026-06-29 04:24:26 | INFO     | rsi_divergence | [NIFTY] 13 trade(s) journaled (0 still open at data end).
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:24:27 | INFO     | rsi_divergence | Saved 1377 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:24:27 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 113400.01 (started 100000.00).
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [BANKNIFTY] 12 trade(s) journaled (0 still open at data end).
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:24:27 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:24:27 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260628_225425.txt
+2026-06-29 04:24:27 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260628_225425.csv
+2026-06-29 04:24:37 | INFO     | rsi_divergence | Pushed 25 trade(s) to Google Sheets.
+2026-06-29 04:24:40 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-29 04:26:56 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-29 04:26:57 | INFO     | rsi_divergence | Saved 1377 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-29 04:26:57 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:26:57 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:26:57 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 112266.02 (started 100000.00).
+2026-06-29 04:26:57 | INFO     | rsi_divergence | [NIFTY] 13 trade(s) journaled (0 still open at data end).
+2026-06-29 04:26:57 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:26:57 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:26:58 | INFO     | rsi_divergence | Saved 1377 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-29 04:26:58 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:26:58 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:26:58 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 113400.01 (started 100000.00).
+2026-06-29 04:26:58 | INFO     | rsi_divergence | [BANKNIFTY] 12 trade(s) journaled (0 still open at data end).
+2026-06-29 04:26:58 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:26:58 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:26:58 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260628_225656.txt
+2026-06-29 04:26:58 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260628_225656.csv
+2026-06-29 04:27:13 | INFO     | rsi_divergence | Pushed 25 trade(s) to Google Sheets.
+2026-06-29 04:27:18 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.
+2026-06-29 04:34:39 | INFO     | rsi_divergence | Database ready at C:\RSI_Divergence_System\database\trades.db
+2026-06-29 04:34:48 | INFO     | rsi_divergence | Saved 1377 candles for NIFTY 15m -> C:\RSI_Divergence_System\data\india\NIFTY_15m.csv
+2026-06-29 04:34:48 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:34:48 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:34:49 | INFO     | rsi_divergence | Backtest complete: 13 trade(s) simulated, final balance 112266.02 (started 100000.00).
+2026-06-29 04:34:49 | INFO     | rsi_divergence | [NIFTY] 13 new trade(s) journaled (0 duplicate(s) skipped, 0 still open at data end).
+2026-06-29 04:34:49 | INFO     | rsi_divergence | [NIFTY] 14 raw divergence event(s) detected.
+2026-06-29 04:34:49 | INFO     | rsi_divergence | [NIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:34:49 | INFO     | rsi_divergence | Saved 1377 candles for BANKNIFTY 15m -> C:\RSI_Divergence_System\data\india\BANKNIFTY_15m.csv
+2026-06-29 04:34:50 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:34:50 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:34:50 | INFO     | rsi_divergence | Backtest complete: 12 trade(s) simulated, final balance 113400.01 (started 100000.00).
+2026-06-29 04:34:50 | INFO     | rsi_divergence | [BANKNIFTY] 12 new trade(s) journaled (0 duplicate(s) skipped, 0 still open at data end).
+2026-06-29 04:34:50 | INFO     | rsi_divergence | [BANKNIFTY] 15 raw divergence event(s) detected.
+2026-06-29 04:34:50 | INFO     | rsi_divergence | [BANKNIFTY] 14 confirmed trade signal(s) after confirmation filter.
+2026-06-29 04:34:50 | INFO     | rsi_divergence | Report written to C:\RSI_Divergence_System\reports\daily_report_20260628_230439.txt
+2026-06-29 04:34:50 | INFO     | rsi_divergence | Exported 25 trade(s) to C:\RSI_Divergence_System\exports\trades_20260628_230439.csv
+2026-06-29 04:35:00 | INFO     | rsi_divergence | Pushed 25 trade(s) to Google Sheets.
+2026-06-29 04:35:06 | INFO     | rsi_divergence | Pushed daily report summary to Google Sheets.

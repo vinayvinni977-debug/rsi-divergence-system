@@ -1,0 +1,27 @@
+==================================================
+  RSI DIVERGENCE SYSTEM -- DAILY REPORT
+==================================================
+Date: 2026-06-28 22:40 UTC
+Run Tag: 20260628_224037
+Markets Tested: NIFTY (15m), BANKNIFTY (15m)
+
+--- Performance Summary (this run) ---
+Total Trades: 25
+Wins: 10
+Losses: 15
+Win Rate: 40.0%
+Profit Factor: 2.61
+Total Return: 25.67%
+Total Profit: 25666.03
+Max Drawdown: 6.48%
+Expectancy (R): 1.0
+Average R: 1.0
+Max Consecutive Losses: 7
+Max Consecutive Wins: 2
+
+--- Current Signals ---
+  NIFTY (15m): no new signal (last confirmed 101 bars ago)
+  BANKNIFTY (15m): no new signal (last confirmed 75 bars ago)
+
+DISCLAIMER: Testing only. No live trading. No real orders placed.
+==================================================

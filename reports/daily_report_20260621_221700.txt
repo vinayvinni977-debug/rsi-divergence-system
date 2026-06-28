@@ -1,0 +1,28 @@
+==================================================
+  RSI DIVERGENCE SYSTEM -- DAILY REPORT
+==================================================
+Date: 2026-06-21 22:17 UTC
+Run Tag: 20260621_221700
+Markets Tested: BTCUSDT (1h), ETHUSDT (1h), SOLUSDT (1h)
+
+--- Performance Summary (this run) ---
+Total Trades: 142
+Wins: 28
+Losses: 114
+Win Rate: 19.72%
+Profit Factor: 0.96
+Total Return: -4.34%
+Total Profit: -4344.94
+Max Drawdown: 16.55%
+Expectancy (R): -0.014
+Average R: -0.014
+Max Consecutive Losses: 18
+Max Consecutive Wins: 2
+
+--- Current Signals ---
+  BTCUSDT (1h): no new signal (last confirmed 88 bars ago)
+  ETHUSDT (1h): no new signal (last confirmed 57 bars ago)
+  SOLUSDT (1h): BEARISH signal -- Entry 73.3400 | SL 74.6800 | TP 67.9800 (2 bar(s) ago)
+
+DISCLAIMER: Testing only. No live trading. No real orders placed.
+==================================================

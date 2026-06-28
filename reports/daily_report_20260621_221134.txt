@@ -1,0 +1,26 @@
+==================================================
+  RSI DIVERGENCE SYSTEM -- DAILY REPORT
+==================================================
+Date: 2026-06-21 22:11 UTC
+Run Tag: 20260621_221134
+Markets Tested: SAMPLE_BTCUSDT (synthetic)
+
+--- Performance Summary (this run) ---
+Total Trades: 3
+Wins: 2
+Losses: 1
+Win Rate: 66.67%
+Profit Factor: 7.54
+Total Return: 7.08%
+Total Profit: 7078.4
+Max Drawdown: 1.0%
+Expectancy (R): 2.333
+Average R: 2.333
+Max Consecutive Losses: 1
+Max Consecutive Wins: 2
+
+--- Current Signals ---
+  SAMPLE_BTCUSDT (1h): no new signal (last confirmed 118 bars ago)
+
+DISCLAIMER: Testing only. No live trading. No real orders placed.
+==================================================
