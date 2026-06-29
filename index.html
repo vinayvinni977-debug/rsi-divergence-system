@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSI Divergence — Dashboard</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0FF4C0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RSI Div">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0A0F1E;
+    --surface:   #1E293B;
+    --surface2:  #162032;
+    --teal:      #0FF4C0;
+    --teal-dim:  rgba(15,244,192,0.12);
+    --red:       #FF4560;
+    --red-dim:   rgba(255,69,96,0.12);
+    --text:      #F1F5F9;
+    --muted:     #94A3B8;
+    --border:    rgba(255,255,255,0.07);
+    --font-ui:   'Space Grotesk', system-ui, sans-serif;
+    --font-data: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,15,30,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 14px; }
+  .logo-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 10px var(--teal);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--teal); }
+    50%       { opacity: 0.5; box-shadow: 0 0 4px var(--teal); }
+  }
+  .topbar h1 {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+  .topbar h1 span { color: var(--teal); }
+  .topbar-right {
+    font-family: var(--font-data);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+  .status-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .status-pill.ok  { background: var(--teal-dim); color: var(--teal); }
+  .status-pill.err { background: var(--red-dim);  color: var(--red); }
+
+  /* ── LAYOUT ── */
+  .main { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr; } }
+
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .kpi-card:hover { border-color: rgba(15,244,192,0.25); }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--teal);
+    opacity: 0.4;
+  }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .kpi-value {
+    font-family: var(--font-data);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+  }
+  .kpi-value.teal { color: var(--teal); }
+  .kpi-value.red  { color: var(--red); }
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-family: var(--font-data);
+  }
+
+  /* ── CHARTS ROW ── */
+  .charts-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 800px) { .charts-row { grid-template-columns: 1fr; } }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .chart-card h3 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .chart-wrap { position: relative; }
+  .equity-wrap { height: 220px; }
+  .donut-wrap  { height: 220px; display: flex; align-items: center; justify-content: center; }
+
+  /* ── TRADE TABLE ── */
+  .table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .table-header h3 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .trade-count {
+    font-family: var(--font-data);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  thead th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface2);
+    white-space: nowrap;
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody td {
+    padding: 10px 16px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  tbody td.sym { color: var(--text); font-weight: 500; }
+  tbody td.num { color: var(--text); }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge.WIN       { background: var(--teal-dim); color: var(--teal); }
+  .badge.LOSS      { background: var(--red-dim);  color: var(--red); }
+  .badge.OPEN      { background: rgba(148,163,184,0.12); color: var(--muted); }
+  .badge.BREAKEVEN { background: rgba(148,163,184,0.12); color: var(--muted); }
+  .badge.bullish   { background: var(--teal-dim); color: var(--teal); }
+  .badge.bearish   { background: var(--red-dim);  color: var(--red); }
+
+  /* ── DAILY REPORTS ── */
+  .reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .report-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    transition: border-color 0.2s;
+  }
+  .report-card:hover { border-color: rgba(15,244,192,0.2); }
+  .report-date {
+    font-family: var(--font-data);
+    font-size: 11px;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .report-markets {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .report-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .report-stat { }
+  .report-stat-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .report-stat-val {
+    font-family: var(--font-data);
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── LOADING / ERROR ── */
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 200;
+  }
+  .loading-screen.hidden { display: none; }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 2px solid var(--border);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text {
+    font-family: var(--font-data);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .empty-state {
+    padding: 48px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: var(--font-data);
+  }
+
+  /* ── CONFIG BANNER ── */
+  .config-banner {
+    background: rgba(255,69,96,0.08);
+    border: 1px solid rgba(255,69,96,0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--red);
+    display: none;
+  }
+  .config-banner.visible { display: block; }
+  .config-banner code {
+    background: rgba(255,69,96,0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-data);
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="spinner"></div>
+  <div class="loading-text">Fetching market data...</div>
+</div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo-dot"></div>
+    <h1>RSI <span>Divergence</span> System</h1>
+  </div>
+  <div class="topbar-right">
+    <span class="status-pill ok" id="statusPill">LIVE</span><br>
+    Last updated: <span id="lastUpdated">—</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- Config banner (shown if SHEET_ID not set) -->
+  <div class="config-banner" id="configBanner">
+    ⚠️ Google Sheet not connected. Open <code>index.html</code> and set <code>SHEET_ID</code> at the top of the script to your Google Sheet ID.
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="section-label">Performance Overview</div>
+  <div class="kpi-grid" id="kpiGrid">
+    <div class="kpi-card"><div class="kpi-label">Total Trades</div><div class="kpi-value" id="kpiTrades">—</div><div class="kpi-sub">all time</div></div>
+    <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value teal" id="kpiWinRate">—</div><div class="kpi-sub">wins / total</div></div>
+    <div class="kpi-card"><div class="kpi-label">Profit Factor</div><div class="kpi-value teal" id="kpiPF">—</div><div class="kpi-sub">gross profit / gross loss</div></div>
+    <div class="kpi-card"><div class="kpi-label">Total Return</div><div class="kpi-value" id="kpiReturn">—</div><div class="kpi-sub">on $100,000 base</div></div>
+    <div class="kpi-card red"><div class="kpi-label">Max Drawdown</div><div class="kpi-value red" id="kpiDD">—</div><div class="kpi-sub">peak to trough</div></div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Equity Curve</h3>
+      <div class="chart-wrap equity-wrap">
+        <canvas id="equityChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Win / Loss Breakdown</h3>
+      <div class="chart-wrap donut-wrap">
+        <canvas id="donutChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trade History -->
+  <div class="section-label">Trade History</div>
+  <div class="table-card">
+    <div class="table-header">
+      <h3>All Trades</h3>
+      <span class="trade-count" id="tradeCount">0 trades</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Symbol</th>
+            <th>Date</th>
+            <th>Direction</th>
+            <th>Entry</th>
+            <th>Stop Loss</th>
+            <th>Take Profit</th>
+            <th>Result</th>
+            <th>Profit</th>
+            <th>R Multiple</th>
+            <th>Exit Date</th>
+          </tr>
+        </thead>
+        <tbody id="tradeTableBody">
+          <tr><td colspan="11" class="empty-state">Loading trades...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Daily Reports -->
+  <div class="section-label">Daily Reports</div>
+  <div class="reports-grid" id="reportsGrid">
+    <div class="empty-state">Loading reports...</div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// CONFIGURATION — set your Google Sheet ID here
+// ═══════════════════════════════════════════════
+// Find your Sheet ID in the URL:
+// https://docs.google.com/spreadsheets/d/SHEET_ID_IS_HERE/edit
+const SHEET_ID = '1rDubUHBzU-ehpsoUvVEQwJ072S_DvefdvuetbcXu0r8';
+
+// Sheet tab names (must match exactly)
+const TRADES_SHEET  = 'Trades';
+const REPORTS_SHEET = 'DailyReports';
+// ═══════════════════════════════════════════════
+
+const BASE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=`;
+
+let equityChartInst = null;
+let donutChartInst  = null;
+
+// ── Fetch CSV from Google Sheets ──
+async function fetchSheet(sheetName) {
+  const url = BASE_URL + encodeURIComponent(sheetName);
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`HTTP ${resp.status} fetching ${sheetName}`);
+  const text = await resp.text();
+  return parseCSV(text);
+}
+
+// ── Minimal CSV parser (handles quoted fields) ──
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = parseLine(lines[0]);
+  return lines.slice(1).map(line => {
+    const vals = parseLine(line);
+    const obj = {};
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+    return obj;
+  });
+}
+
+function parseLine(line) {
+  const result = [];
+  let cur = '', inQuote = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { inQuote = !inQuote; }
+    else if (ch === ',' && !inQuote) { result.push(cur); cur = ''; }
+    else { cur += ch; }
+  }
+  result.push(cur);
+  return result;
+}
+
+// ── Number helpers ──
+function n(v, dec = 2) {
+  const x = parseFloat(v);
+  return isNaN(x) ? '—' : x.toFixed(dec);
+}
+function pct(v) { return n(v) + '%'; }
+
+// ── Render KPI cards ──
+function renderKPIs(reports) {
+  if (!reports.length) return;
+  // Use the latest report row
+  const latest = reports[reports.length - 1];
+  document.getElementById('kpiTrades').textContent  = latest.total_trades || '—';
+  document.getElementById('kpiWinRate').textContent  = pct(latest.win_rate_pct);
+  document.getElementById('kpiPF').textContent       = n(latest.profit_factor);
+  document.getElementById('kpiReturn').textContent   = pct(latest.total_return_pct);
+  document.getElementById('kpiDD').textContent       = pct(latest.max_drawdown_pct);
+
+  // Color return green/red
+  const retEl = document.getElementById('kpiReturn');
+  retEl.className = 'kpi-value ' + (parseFloat(latest.total_return_pct) >= 0 ? 'teal' : 'red');
+}
+
+// ── Equity curve ──
+function renderEquity(trades) {
+  const closed = trades.filter(t => t.result === 'WIN' || t.result === 'LOSS' || t.result === 'BREAKEVEN');
+  let balance = 100000;
+  const points = [{ x: 'Start', y: balance }];
+  closed.forEach((t, i) => {
+    balance += parseFloat(t.profit) || 0;
+    points.push({ x: t.date ? t.date.substring(0, 10) : `T${i+1}`, y: Math.round(balance) });
+  });
+
+  const labels = points.map(p => p.x);
+  const data   = points.map(p => p.y);
+
+  const ctx = document.getElementById('equityChart').getContext('2d');
+  if (equityChartInst) equityChartInst.destroy();
+
+  // Gradient fill
+  const grad = ctx.createLinearGradient(0, 0, 0, 220);
+  grad.addColorStop(0,   'rgba(15,244,192,0.18)');
+  grad.addColorStop(1,   'rgba(15,244,192,0)');
+
+  equityChartInst = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        borderColor: '#0FF4C0',
+        borderWidth: 2,
+        backgroundColor: grad,
+        fill: true,
+        tension: 0.3,
+        pointRadius: data.map((_, i) => i === data.length - 1 ? 6 : 0),
+        pointBackgroundColor: '#0FF4C0',
+        pointBorderColor: '#0A0F1E',
+        pointBorderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        backgroundColor: '#1E293B',
+        titleColor: '#94A3B8',
+        bodyColor: '#F1F5F9',
+        borderColor: 'rgba(255,255,255,0.08)',
+        borderWidth: 1,
+        callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString() }
+      }},
+      scales: {
+        x: { display: false },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: {
+            color: '#94A3B8',
+            font: { family: 'JetBrains Mono', size: 10 },
+            callback: v => '$' + v.toLocaleString()
+          }
+        }
+      }
+    }
+  });
+}
+
+// ── Win/Loss donut ──
+function renderDonut(trades) {
+  const wins   = trades.filter(t => t.result === 'WIN').length;
+  const losses = trades.filter(t => t.result === 'LOSS').length;
+  const open   = trades.filter(t => t.result === 'OPEN').length;
+
+  const ctx = document.getElementById('donutChart').getContext('2d');
+  if (donutChartInst) donutChartInst.destroy();
+
+  donutChartInst = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Win', 'Loss', 'Open'],
+      datasets: [{
+        data: [wins, losses, open],
+        backgroundColor: ['rgba(15,244,192,0.8)', 'rgba(255,69,96,0.8)', 'rgba(148,163,184,0.4)'],
+        borderColor: '#0A0F1E',
+        borderWidth: 3,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '68%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#94A3B8',
+            font: { family: 'Space Grotesk', size: 11 },
+            padding: 16,
+            usePointStyle: true,
+            pointStyleWidth: 8,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#1E293B',
+          titleColor: '#94A3B8',
+          bodyColor: '#F1F5F9',
+          borderColor: 'rgba(255,255,255,0.08)',
+          borderWidth: 1,
+        }
+      }
+    }
+  });
+}
+
+// ── Trade table ──
+function renderTradeTable(trades) {
+  const tbody = document.getElementById('tradeTableBody');
+  document.getElementById('tradeCount').textContent = trades.length + ' trades';
+
+  if (!trades.length) {
+    tbody.innerHTML = '<tr><td colspan="11" class="empty-state">No trades found. Run a backtest first.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = trades.map((t, i) => {
+    const profit = parseFloat(t.profit) || 0;
+    const profitColor = profit >= 0 ? 'color:#0FF4C0' : 'color:#FF4560';
+    const rColor = parseFloat(t.r_multiple) >= 0 ? 'color:#0FF4C0' : 'color:#FF4560';
+    const date = (t.date || '').substring(0, 16).replace('T', ' ');
+    const exitDate = (t.exit_date || '').substring(0, 16).replace('T', ' ');
+    return `<tr>
+      <td class="num">${i + 1}</td>
+      <td class="sym">${t.symbol || '—'}</td>
+      <td>${date || '—'}</td>
+      <td><span class="badge ${t.direction}">${t.direction || '—'}</span></td>
+      <td class="num">${n(t.entry, 4)}</td>
+      <td class="num">${n(t.stop_loss, 4)}</td>
+      <td class="num">${n(t.take_profit, 4)}</td>
+      <td><span class="badge ${t.result}">${t.result || '—'}</span></td>
+      <td class="num" style="${profitColor}">${profit >= 0 ? '+' : ''}${n(t.profit, 2)}</td>
+      <td class="num" style="${rColor}">${n(t.r_multiple, 3)}R</td>
+      <td>${exitDate || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Daily reports cards ──
+function renderReports(reports) {
+  const grid = document.getElementById('reportsGrid');
+  if (!reports.length) {
+    grid.innerHTML = '<div class="empty-state">No daily reports found.</div>';
+    return;
+  }
+
+  // Show latest 12 reports, newest first
+  const shown = [...reports].reverse().slice(0, 12);
+  grid.innerHTML = shown.map(r => {
+    const retVal = parseFloat(r.total_return_pct) || 0;
+    const retColor = retVal >= 0 ? 'var(--teal)' : 'var(--red)';
+    return `<div class="report-card">
+      <div class="report-date">${(r.date || '').substring(0, 16)}</div>
+      <div class="report-markets">${r.markets_tested || '—'}</div>
+      <div class="report-stats">
+        <div class="report-stat">
+          <div class="report-stat-label">Trades</div>
+          <div class="report-stat-val">${r.total_trades || 0}</div>
+        </div>
+        <div class="report-stat">
+          <div class="report-stat-label">Win Rate</div>
+          <div class="report-stat-val">${pct(r.win_rate_pct)}</div>
+        </div>
+        <div class="report-stat">
+          <div class="report-stat-label">Profit Factor</div>
+          <div class="report-stat-val">${n(r.profit_factor)}</div>
+        </div>
+        <div class="report-stat">
+          <div class="report-stat-label">Return</div>
+          <div class="report-stat-val" style="color:${retColor}">${pct(r.total_return_pct)}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Main load ──
+async function loadDashboard() {
+  const loading = document.getElementById('loadingScreen');
+  const banner  = document.getElementById('configBanner');
+
+  if (!SHEET_ID || SHEET_ID === 'YOUR_SHEET_ID_HERE') {
+    banner.classList.add('visible');
+    loading.classList.add('hidden');
+    document.getElementById('statusPill').textContent = 'NOT CONFIGURED';
+    document.getElementById('statusPill').className = 'status-pill err';
+    return;
+  }
+
+  try {
+    const [trades, reports] = await Promise.all([
+      fetchSheet(TRADES_SHEET),
+      fetchSheet(REPORTS_SHEET),
+    ]);
+
+    renderKPIs(reports);
+    renderEquity(trades);
+    renderDonut(trades);
+    renderTradeTable(trades);
+    renderReports(reports);
+
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+    document.getElementById('statusPill').textContent = 'LIVE';
+    document.getElementById('statusPill').className = 'status-pill ok';
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById('statusPill').textContent = 'ERROR';
+    document.getElementById('statusPill').className = 'status-pill err';
+    document.getElementById('lastUpdated').textContent = err.message;
+    banner.textContent = '⚠️ Could not load data: ' + err.message + '. Make sure your Google Sheet is shared publicly (View access).';
+    banner.classList.add('visible');
+  } finally {
+    loading.classList.add('hidden');
+  }
+}
+
+// Auto-refresh every 5 minutes
+loadDashboard();
+setInterval(loadDashboard, 5 * 60 * 1000);
+
+// Register service worker for PWA/offline support
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('SW registered'))
+    .catch(e => console.log('SW error:', e));
+}
+</script>
+</body>
+</html>
