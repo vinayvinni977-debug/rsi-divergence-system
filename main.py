@@ -264,7 +264,11 @@ def run_pipeline(markets: str = "all", allow_download: bool = True, mode: str = 
 
     sheets_cfg = CONFIG.get("google_sheets", {})
     if sheets_cfg.get("enabled", False):
-        sheets_send_trades(all_trades, sheets_cfg)
+        # Push only NEW trades to Sheets (avoids duplicate rows accumulating)
+        # On first run all_trades will have all historical trades
+        # On subsequent runs only genuinely new trades get added
+        if all_trades:
+            sheets_send_trades(all_trades, sheets_cfg)
         report_dict = {
             "date": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
             "run_tag": run_tag,
